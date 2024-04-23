@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../UserContext"; // Import useUser hook
 import logo_img from "../resources/logo_img.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = useUser(); // Get isLoggedIn and setIsLoggedIn from UserContext
 
   useEffect(() => {
     // Check if user is logged in (you can implement your own logic)
@@ -16,7 +18,7 @@ const Navbar = () => {
     } else {
       setIsLoggedIn(false);
     }
-  }, []);
+  }, [setIsLoggedIn]);
 
   const handleLogout = () => {
     try {
@@ -32,14 +34,16 @@ const Navbar = () => {
 
   return (
     <div className="shadow-md w-full top-0 left-0">
-      <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+      <div className="md:flex items-center justify-between bg-white py-2 md:px-10 px-7">
         <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
           <span>
-            <img
-              className="h-16 w-16 md:h-20 md:w-20"
-              src={logo_img}
-              alt="App Logo"
-            />
+            <Link to="/">
+              <img
+                className="h-16 w-16 md:h-20 md:w-20"
+                src={logo_img}
+                alt="App Logo"
+              />
+            </Link>
           </span>
         </div>
 
@@ -63,7 +67,7 @@ const Navbar = () => {
           </li>
           {isLoggedIn ? (
             <button
-              className="bg-green-500 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-green-400 
+              className="bg-red-500 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-red-400 
             duration-500"
               onClick={handleLogout}
             >
@@ -76,11 +80,11 @@ const Navbar = () => {
                   <Link to="/login">Login</Link>
                 </Button>
               </li>
-              <li className="md:ml-8 text-xl md:my-0 my-7">
+              {/* <li className="md:ml-8 text-xl md:my-0 my-7">
                 <Button>
                   <Link to="/register">Register</Link>
                 </Button>
-              </li>
+              </li> */}
             </>
           )}
         </ul>

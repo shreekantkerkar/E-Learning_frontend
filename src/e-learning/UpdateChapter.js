@@ -34,9 +34,25 @@ const UpdateChapter = () => {
       })
       .then((result) => {
         console.log(result);
-        navigate("/seContent");
+        navigate("/");
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleChangeVideoLink = (index, value) => {
+    const updatedVideoLinks = [...videoLinks];
+    updatedVideoLinks[index] = value;
+    setVideoLinks(updatedVideoLinks);
+  };
+
+  const handleAddVideoLink = () => {
+    setVideoLinks([...videoLinks, ""]);
+  };
+
+  const handleRemoveVideoLink = (index) => {
+    const updatedVideoLinks = [...videoLinks];
+    updatedVideoLinks.splice(index, 1);
+    setVideoLinks(updatedVideoLinks);
   };
 
   return (
@@ -70,22 +86,32 @@ const UpdateChapter = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="youtubeLink" className="block font-bold mb-1">
-              YouTube Links
-            </label>
+            <label className="block font-bold mb-1">YouTube Links</label>
             {videoLinks.map((link, index) => (
-              <input
-                key={index}
-                type="text"
-                value={link}
-                onChange={(e) => {
-                  const updatedLinks = [...videoLinks];
-                  updatedLinks[index] = e.target.value;
-                  setVideoLinks(updatedLinks);
-                }}
-                className="w-full border border-gray-300 rounded-md px-4 py-2 mb-2"
-              />
+              <div key={index} className="flex items-center mb-2">
+                <input
+                  type="text"
+                  value={link}
+                  onChange={(e) => handleChangeVideoLink(index, e.target.value)}
+                  className="w-full border border-gray-300 rounded-md px-4 py-2"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveVideoLink(index)}
+                  className="ml-2 px-2 py-1 bg-red-500 text-white rounded-full hover:bg-red-600"
+                >
+                  Remove
+                </button>
+              </div>
             ))}
+            <button
+              type="button"
+              onClick={handleAddVideoLink}
+              className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+            >
+              Add Link
+            </button>
           </div>
           <div className="mb-4">
             <label htmlFor="driveLink" className="block font-bold mb-1">

@@ -14,10 +14,10 @@ const SEContent = () => {
       .get("http://localhost:4000/api/v1/getSubjects")
       .then((response) => {
         
-        const semester3FilteredSubjects = response.data.filter(subject => subject.semesters === 21);
+        const semester3FilteredSubjects = response.data.filter(subject => subject.semesters === 31);
         setSemester3Subjects(semester3FilteredSubjects);
         
-        const semester4FilteredSubjects = response.data.filter(subject => subject.semesters === 22);
+        const semester4FilteredSubjects = response.data.filter(subject => subject.semesters === 32);
         setSemester4Subjects(semester4FilteredSubjects);
       })
       .catch((error) => {
@@ -29,7 +29,7 @@ const SEContent = () => {
     <div className="p-10 font-[Poppins] min-h-screen">
       <div className="w-6/12 mx-auto my-4">
         <h2 className="text-4xl p-4 text-center font-extrabold mb-4">
-          Semester 3 Subjects
+          Semester 5 Subjects
         </h2>
         {semester3Subjects.map((subject) => (
           <Accordion
@@ -50,7 +50,7 @@ const SEContent = () => {
         ))}
 
         <h2 className="text-4xl p-4 text-center font-extrabold mb-4">
-          Semester 4 Subjects
+          Semester 6 Subjects
         </h2>
         {semester4Subjects.map((subject) => (
           <Accordion

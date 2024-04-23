@@ -3,7 +3,7 @@ import img from "../resources/hero.svg";
 
 const Home = () => {
   return (
-    <div className="min-h-[70vh] flex flex-col md:flex-row md:justify-between items-center md:mx-32 mx-5 mt-10 font-[Poppins]">
+    <div className="min-h-[70vh] flex flex-col md:flex-row md:justify-between items-center md:mx-32 mx-5 mt-5 font-[Poppins]">
       <div className="md:w-2/4 text-center">
         <h2 className="text-5xl font-semibold leading-tight">
           Explore E-Learning Content
@@ -22,6 +22,7 @@ const Home = () => {
       <div className="w-full md:w-2/4">
         <img src={img} alt="img" className="w-full" />
       </div>
+      
     </div>
   );
 };

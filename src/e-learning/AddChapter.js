@@ -38,7 +38,8 @@ const AddChapter = () => {
       })
       .then((result) => {
         console.log(result);
-        navigate("/seContent");
+        // window.location.reload();
+        navigate("/");
       })
       .catch((err) => console.log(err));
   };

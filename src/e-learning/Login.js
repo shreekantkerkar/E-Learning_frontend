@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../UserContext"; // Import useUser hook
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useUser(); // Get setIsLoggedIn from UserContext
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,8 +22,10 @@ const Login = () => {
       if (response.ok) {
         // Save token to localStorage
         localStorage.setItem("token", data.token);
+        // Update isLoggedIn state using UserContext
+        setIsLoggedIn(true);
         // Redirect to the desired page after successful login
-        navigate("/seContent");
+        navigate("/");
       } else {
         // Handle login failure (e.g., display error message)
         console.error(data.message);
